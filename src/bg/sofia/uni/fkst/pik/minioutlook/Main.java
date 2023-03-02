@@ -17,7 +17,7 @@ public class Main {
         int choice;
         int state;
         String metadata = "sender: gosho@abv.bg\n" +
-                "subject: youtuber uploaded a new video\n" +
+                "subject: subject example\n" +
                 "recipients: petko@abv.bg, gosho@abv.bg \n" +
                 "received: 2022-12-08 14:14";
 
@@ -45,6 +45,8 @@ public class Main {
                         System.out.println("Enter account name");
                         accountName = br.readLine();
                         System.out.println("Enter folder's path ");
+                        System.out.println("Folder path must always start with root and end with '/'");
+                        System.out.println("Example: root/inbox/spam/ ");
                         String folderPath = br.readLine();
                         outlook.createFolder(accountName, folderPath);
                         break;
@@ -82,7 +84,7 @@ public class Main {
                 }
             }
             while (state == 1);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Exception occurred " + e);
             e.printStackTrace();
         }

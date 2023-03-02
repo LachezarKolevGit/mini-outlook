@@ -97,7 +97,6 @@ public class Outlook implements MailClient {
             counter = 0;
             if (rule.subjectIncludes() != null) {
                 contains = checkIfContainsTags(index.subject(), rule.subjectIncludes());
-                System.out.println("---------------contains should be false " + contains);
                 if (contains) {
                     counter++;
                     contains = false;
@@ -105,7 +104,6 @@ public class Outlook implements MailClient {
             }
             if (rule.subjectOrBodyIncludes() != null) {
                 contains = checkIfContainsTags(index.subject(), rule.subjectOrBodyIncludes());
-                System.out.println("contains for body " +contains);
                 if (contains) {
                     counter++;
                     contains = false;
@@ -125,7 +123,7 @@ public class Outlook implements MailClient {
                     contains = false;
                 }
             }
-            System.out.println("---------------------- counter is :" + counter);
+
             if (counter == numberOfRuleConditions) {
                 moveMailFromInboxToFolder(index, folderPath, folder);
             }
@@ -167,7 +165,6 @@ public class Outlook implements MailClient {
     public void receiveMail(String accountName, String mailMetadata, String mailContent) {
         Account account = accountsHashMap.get(accountName);
         Mail mail = Mail.decodeMetadata(accountsHashMap, mailMetadata, mailContent);
-        System.out.println("Mail inside .receiveMail() " + mail);
 
         Folder folder = foldersHashMap.get(account);
         folder = folder.goToFolder("root/inbox/");
@@ -206,7 +203,6 @@ public class Outlook implements MailClient {
         }
 
         Account account = accountsHashMap.get(accountName);  //sender
-        System.out.println("Sender account in sendMail is " + account.name());
         if (!mailMetadata.contains("sender:") || !mailMetadata.contains(account.emailAddress())) {
             mailMetadata = "sender: " + account.emailAddress() + "\n" + mailMetadata;
         }

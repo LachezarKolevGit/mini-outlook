@@ -47,7 +47,6 @@ public record Mail(Account sender, Set<String> recipients, String subject, Strin
 
         String sender = mailMetadata.substring(doubleDotIndexArray[ROW] + UNUSED_SPACE_AFTER_DOT, newLineIndexArray[ROW]);
         sender = sender.trim();
-        System.out.println("sender is: " + sender);
         Account accountSender = null;
         for (Map.Entry<String, Account> entry : accountsHashMap.entrySet()) {
             if (entry.getValue().emailAddress().equals(sender)) {
